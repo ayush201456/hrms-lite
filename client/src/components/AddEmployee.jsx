@@ -18,9 +18,10 @@ function AddEmployee({ onAdd, apiBase }) {
       setSuccess('Employee added successfully!');
       setTimeout(() => setSuccess(''), 3000);
       onAdd();
-    }  catch (err) {
+  } catch (err) {
   console.error('Error adding employee:', err); // Log the full error for debugging
-  setError(err.response?.data?.error || 'Error adding employee'); // Ensure it's a string
+  const errorMessage = err.response?.data?.error || err.message || 'Error adding employee';
+  setError(typeof errorMessage === 'string' ? errorMessage : 'An unexpected error occurred'); // Ensure it's always a string
 } finally {
       setLoading(false);
     }
