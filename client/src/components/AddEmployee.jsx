@@ -19,8 +19,9 @@ function AddEmployee({ onAdd, apiBase }) {
       setTimeout(() => setSuccess(''), 3000);
       onAdd();
     } catch (err) {
-      setError(err.response?.data?.error || 'Error adding employee');
-    } finally {
+  console.error('Error adding employee:', err); // Log the full error for debugging
+  setError(err.response?.data?.error || 'Error adding employee'); // Ensure it's a string
+} finally {
       setLoading(false);
     }
   };
